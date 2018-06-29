@@ -4,7 +4,13 @@
  * @author  : Dung Do Dang
  * @version : V1.0.0
  * @date    : 2018-06-21
- * @brief   : Driver for the CCD sensor chip from Toshiba
+ * @brief   : Driver API for the TCD1304 CCD sensor chip from Toshiba
+ *
+ * The software module is split into two part.
+ * 1) Generic API to implement the necessary functionality to control the sensor
+ * 2) Portable layer to configure and control the hardware platform the sensor
+ * is connected to. In this way only (2) is needed to be changed if the hardware
+ * platform is needed to be replaced.
  *
  *******************************************************************************
  *
@@ -75,8 +81,9 @@ static TCD_ERR_t TCD_ADC_Init(void);
 
 /*******************************************************************************
  * @Brief   Init MCU timers and ADC + DMA to start acquisition of sensor data
- * @param
- * @retval
+ * @param   config, TCD_CONFIG_t: Struct holding configuration for the TCD1304.
+ * @retval  TCD_OK on success or TCD_ERR_t error codes.
+ *
  ******************************************************************************/
 TCD_ERR_t TCD_Init(TCD_CONFIG_t *config)
 {
@@ -119,6 +126,7 @@ TCD_ERR_t TCD_Init(TCD_CONFIG_t *config)
         return err;
     }
 
+    /* Set the process controll block to initial values */
     TCD_pcb.counter = 0U;
     TCD_pcb.totalSpectrumsAcquired = 0U;
     TCD_pcb.readyToRun = 1U;
@@ -127,6 +135,13 @@ TCD_ERR_t TCD_Init(TCD_CONFIG_t *config)
     return err;
 }
 
+/*******************************************************************************
+ * @Brief   Set electronic shutter period in microseconds
+ * @param   config, TCD_CONFIG_t: Struct holding configuration for the TCD1304.
+ * @retval  TCD_OK on success or TCD_ERR_t error codes.
+ *
+ * Make sure that the ICG and SH pulses overlap.
+ ******************************************************************************/
 TCD_ERR_t TCD_SetIntTime(TCD_CONFIG_t *config)
 {
     if ( TCD_pcb.readyToRun == 1U )
@@ -185,7 +200,7 @@ TCD_ERR_t TCD_Start(void)
 }
 
 /*******************************************************************************
- * @brief   Stop the timers and data acquisition with ADC+DMA
+ * @brief   Stop the timers to stop the data acquisition
  * @param   None
  * @retval  TCD_OK on success or TCD_ERR_t code
  *
@@ -207,8 +222,9 @@ TCD_ERR_t TCD_Stop(void)
 
 /*******************************************************************************
  * @brief   Handle sensor data when the ADC+DMA has samples all pixels.
- * @param   pSensorDataBuf, address to the RAM locating
- * @retval
+ * @param   None
+ * @retval  None
+ *
  * This function is called from the ADC DMA transfer complete interrupt handler.
  * The DMA is configured to circular (ring buffer) mode. The interrupt request
  * flag is generated just before the tranfer counter is re-set to the programmed
@@ -242,10 +258,11 @@ void TCD_ReadCompletedCallback(void)
 }
 
 /*******************************************************************************
- * @brief
- * @param
- * @retval
+ * @brief   Get the Sensor data structure
+ * @param   None
+ * @retval  Pointer to the local TCD_DATA_t in RAM
  *
+ * The user can access raw data or avereaged data in the structure.
  ******************************************************************************/
 TCD_DATA_t* TCD_GetSensorData(void)
 {
@@ -275,9 +292,9 @@ void TCD_ClearDataReadyFlag(void)
 }
 
 /*******************************************************************************
- * @brief
- * @param
- * @retval
+ * @brief   Get the total of spectrum collected since the start
+ * @param   None
+ * @retval  None
  *
  ******************************************************************************/
 uint64_t TCD_GetNumOfSpectrumsAcquired(void)
@@ -318,7 +335,7 @@ static TCD_ERR_t TCD_FM_Init(void)
  * @Brief   Generate the ICG pulses
  * @param   None
  * @retval  None
- * Check that the ICG frequency is within the limits. 0 - 100 Hz
+ *
  ******************************************************************************/
 static TCD_ERR_t TCD_ICG_Init(void)
 {
@@ -341,7 +358,8 @@ static TCD_ERR_t TCD_ICG_Init(void)
  * @Brief   Generate the electronic shutter (SH) pulses
  * @param   None
  * @retval  None
- * Check that the SH period is within the limits. >=10 us and < ICG period.
+ *
+ * Check that the SH period is within the limits. 10 microseconds to ICG period.
  * In addition the SH and the ICG pulses MUST overlap. This is fullfilled if
  * this relationship is held:
  * P_ICG = N x P_SH, where N is an integer.
@@ -370,7 +388,7 @@ static TCD_ERR_t TCD_SH_Init(void)
 }
 
 /*******************************************************************************
- * @Brief   Generate the Master Clock to run at CFG_FM_FREQUENCY_HZ (TIM8)
+ * @Brief   Generate the ADC trigger signal
  * @param   None
  * @retval  None
  ******************************************************************************/
@@ -387,7 +405,7 @@ static TCD_ERR_t TCD_ADC_Init(void)
     {
         return TCD_ERR_ADC_INIT;
     }
-    /* Initialize the timer used to trigger AD conversion */
+    /* Initialize the timer used to trigger AD conversion with f_ADC = f_MCLK / 4 */
     TCD_PORT_ConfigADCTrigger( TCD_config->f_master / 4U );
 
     /* Start the DMA transfer */

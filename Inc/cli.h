@@ -58,8 +58,8 @@ typedef enum
     CLI_ERR_NOT_INITIALIZED,
     CLI_ERR_CRITICAL
 } CLI_ERR_t;
-/* Exported defines ----------------------------------------------------------*/
 
+/* Exported defines ----------------------------------------------------------*/
 /* Exported macros -----------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/

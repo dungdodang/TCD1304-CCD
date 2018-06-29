@@ -310,9 +310,9 @@ static CLI_ERR_t CLI_GetCommand(void)
 }
 
 /*******************************************************************************
- * @brief
- * @param
- * @retval
+ * @brief   Clear the command buffers
+ * @param   None
+ * @retval  None
  *
  ******************************************************************************/
 static void CLI_ClearCommand(void)

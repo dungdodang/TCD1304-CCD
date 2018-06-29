@@ -4,7 +4,7 @@
  * @author  : Dung Do Dang
  * @version : V1.0.0
  * @date    : 2018-06-21
- * @brief   : Driver for the CCD sensor chip from Toshiba
+ * @brief   : Driver API for the TCD1304 CCD sensor chip from Toshiba
  *
  *******************************************************************************
  *

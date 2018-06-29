@@ -6,11 +6,12 @@
  * @date    : 2018-06-22
  * @brief   : Portable layer of the driver for the CCD sensor chip from Toshiba
  *
- * The software module is split into two part.
- * 1) Generic API to implement the necessary functionality to control the sensor
- * 2) Portable layer to configure and control the hardware platform the sensor
- * is connected to. In this way only (2) is needed to be changed if the hardware
- * platform is needed to be replaced.
+ * This portable driver is implemented for STM32F746-Discovery board using 
+ * pins on the Arduino Uno connector:
+ * A0 = ICG
+ * A2 = SH
+ * A3 = fM
+ * A5 = Sensor Output
  *
  *******************************************************************************
  *
@@ -83,7 +84,7 @@ static void TCD_PORT_SH_SetDelay(uint32_t cnt);
  */
 
 /*******************************************************************************
- * @Brief   Start to generate ICG pulses and SH pulses
+ * @Brief   Start the timers to generate fM, ICG and SH pulses
  * @param   None
  * @retval  None
  ******************************************************************************/
@@ -106,7 +107,7 @@ void TCD_PORT_Run(void)
 }
 
 /*******************************************************************************
- * @Brief   Start to generate ICG pulses and SH pulses
+ * @Brief   Stop the timers
  * @param   None
  * @retval  None
  ******************************************************************************/
@@ -578,9 +579,9 @@ int32_t TCD_PORT_InitADC(void)
 }
 
 /*******************************************************************************
- * @brief
- * @param
- * @retval
+ * @brief   Start the ADC with DMA transfer
+ * @param   *dataBuffer, uint16_t: Pointer to the data location in RAM
+ * @retval  Error codes
  *
  ******************************************************************************/
 int32_t TCD_PORT_StartADC(uint16_t *dataBuffer)
@@ -698,7 +699,10 @@ void TCD_CCD_ADC_INTERRUPT_HANDLER(void)
     TCD_ReadCompletedCallback();
 }
 
-
+/**
+ * The user application must provide an implementation to trap the application
+ * for debugging purposes.
+ */
 __weak void _Error_Handler(char *file, int line)
 {
     /* User should implement this function some else */
