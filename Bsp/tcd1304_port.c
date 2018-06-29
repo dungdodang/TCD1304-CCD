@@ -6,7 +6,7 @@
  * @date    : 2018-06-22
  * @brief   : Portable layer of the driver for the CCD sensor chip from Toshiba
  *
- * This portable driver is implemented for STM32F746-Discovery board using 
+ * This portable driver is implemented for STM32F746-Discovery board using
  * pins on the Arduino Uno connector:
  * A0 = ICG
  * A2 = SH
@@ -149,9 +149,9 @@ int32_t TCD_PORT_ConfigMasterClock(uint32_t freq)
     htim13.Init.CounterMode = TIM_COUNTERMODE_UP;
     htim13.Init.Period = period;
     htim13.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-    #ifdef TIM_AUTORELOAD_PRELOAD_DISABLE
+#ifdef TIM_AUTORELOAD_PRELOAD_DISABLE
     htim13.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-    #endif
+#endif
 
     if ( HAL_TIM_Base_Init( &htim13 ) != HAL_OK )
     {
@@ -174,15 +174,15 @@ int32_t TCD_PORT_ConfigMasterClock(uint32_t freq)
     }
 
     /* Check the parameters */
-    assert_param(IS_TIM_CCX_INSTANCE(htim13.Instance, TIM_CHANNEL_1));
+    assert_param( IS_TIM_CCX_INSTANCE(htim13.Instance, TIM_CHANNEL_1) );
 
     /* Enable the Capture compare channel */
-    TIM_CCxChannelCmd(htim13.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE);
+    TIM_CCxChannelCmd( htim13.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE );
 
-    if(IS_TIM_ADVANCED_INSTANCE(htim13.Instance) != RESET)
+    if ( IS_TIM_ADVANCED_INSTANCE( htim13.Instance ) != RESET )
     {
-      /* Enable the main output */
-      __HAL_TIM_MOE_ENABLE(&htim13);
+        /* Enable the main output */
+        __HAL_TIM_MOE_ENABLE( &htim13 );
     }
 
     return err;
@@ -216,16 +216,16 @@ int32_t TCD_PORT_ConfigICGClock(const uint32_t t_icg_us)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    HAL_GPIO_Init( GPIOA, &GPIO_InitStruct );
 
     htim2.Instance = TIM2;
     htim2.Init.Prescaler = prescaler;
     htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
     htim2.Init.Period = period;
     htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-    #ifdef TIM_AUTORELOAD_PRELOAD_DISABLE
+#ifdef TIM_AUTORELOAD_PRELOAD_DISABLE
     htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-    #endif
+#endif
 
     if ( HAL_TIM_Base_Init( &htim2 ) != HAL_OK )
     {
@@ -263,23 +263,23 @@ int32_t TCD_PORT_ConfigICGClock(const uint32_t t_icg_us)
     }
 
     /* Set TIM2 interrupt level and enable interrupt for TIM2 */
-    HAL_NVIC_SetPriority(TIM2_IRQn, TIM_ICG_INTERRUPT_LEVEL, 0);
-    HAL_NVIC_EnableIRQ(TIM2_IRQn);
+    HAL_NVIC_SetPriority( TIM2_IRQn, TIM_ICG_INTERRUPT_LEVEL, 0 );
+    HAL_NVIC_EnableIRQ( TIM2_IRQn );
 
     /* Check the parameters */
-    assert_param(IS_TIM_CCX_INSTANCE(htim2.Instance, TIM_CHANNEL_1));
+    assert_param( IS_TIM_CCX_INSTANCE(htim2.Instance, TIM_CHANNEL_1) );
 
     /* Enable the Capture compare channel */
-    TIM_CCxChannelCmd(htim2.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE);
+    TIM_CCxChannelCmd( htim2.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE );
 
-    if(IS_TIM_ADVANCED_INSTANCE(htim2.Instance) != RESET)
+    if ( IS_TIM_ADVANCED_INSTANCE( htim2.Instance ) != RESET )
     {
-      /* Enable the main output */
-      __HAL_TIM_MOE_ENABLE(&htim2);
+        /* Enable the main output */
+        __HAL_TIM_MOE_ENABLE( &htim2 );
     }
 
     /* Enable the TIM Capture/Compare 1 interrupt */
-    __HAL_TIM_ENABLE_IT(&htim2, TIM_IT_CC1);
+    __HAL_TIM_ENABLE_IT( &htim2, TIM_IT_CC1 );
 
     return err;
 }
@@ -310,16 +310,16 @@ int32_t TCD_PORT_ConfigSHClock(const uint32_t t_int_us)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF9_TIM14;
-    HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+    HAL_GPIO_Init( GPIOF, &GPIO_InitStruct );
 
     htim14.Instance = TIM14;
     htim14.Init.Prescaler = prescaler;
     htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
     htim14.Init.Period = period;
     htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-    #ifdef TIM_AUTORELOAD_PRELOAD_DISABLE
+#ifdef TIM_AUTORELOAD_PRELOAD_DISABLE
     htim14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-    #endif
+#endif
 
     if ( HAL_TIM_Base_Init( &htim14 ) != HAL_OK )
     {
@@ -342,15 +342,15 @@ int32_t TCD_PORT_ConfigSHClock(const uint32_t t_int_us)
     }
 
     /* Check the parameters */
-    assert_param(IS_TIM_CCX_INSTANCE(htim13.Instance, TIM_CHANNEL_1));
+    assert_param( IS_TIM_CCX_INSTANCE(htim13.Instance, TIM_CHANNEL_1) );
 
     /* Enable the Capture compare channel */
-    TIM_CCxChannelCmd(htim14.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE);
+    TIM_CCxChannelCmd( htim14.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE );
 
-    if(IS_TIM_ADVANCED_INSTANCE(htim14.Instance) != RESET)
+    if ( IS_TIM_ADVANCED_INSTANCE( htim14.Instance ) != RESET )
     {
-      /* Enable the main output */
-      __HAL_TIM_MOE_ENABLE(&htim14);
+        /* Enable the main output */
+        __HAL_TIM_MOE_ENABLE( &htim14 );
     }
 
     return err;
@@ -420,9 +420,9 @@ void TCD_PORT_ConfigADCTrigger(uint32_t f_adc)
     htim8.Init.Period = period;
     htim8.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     htim8.Init.RepetitionCounter = CFG_CCD_NUM_PIXELS - 1U; /* Remember 1U less */
-    #ifdef TIM_AUTORELOAD_PRELOAD_DISABLE
+#ifdef TIM_AUTORELOAD_PRELOAD_DISABLE
     htim8.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-    #endif
+#endif
 
     if ( HAL_TIM_Base_Init( &htim8 ) != HAL_OK )
     {
@@ -439,9 +439,9 @@ void TCD_PORT_ConfigADCTrigger(uint32_t f_adc)
     {
         _Error_Handler( __FILE__, __LINE__ );
     }
-    if (HAL_TIM_OnePulse_Init(&htim8, TIM_OPMODE_SINGLE) != HAL_OK)
+    if ( HAL_TIM_OnePulse_Init( &htim8, TIM_OPMODE_SINGLE ) != HAL_OK )
     {
-        _Error_Handler(__FILE__, __LINE__);
+        _Error_Handler( __FILE__, __LINE__ );
     }
     sMasterConfig.MasterOutputTrigger = TIM_TRGO_OC1;
     sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_RESET;
@@ -526,7 +526,7 @@ int32_t TCD_PORT_InitADC(void)
 
     if ( HAL_DMA_Init( &hdma_adc3 ) != HAL_OK )
     {
-      _Error_Handler( __FILE__, __LINE__ );
+        _Error_Handler( __FILE__, __LINE__ );
     }
 
     __HAL_LINKDMA( &hadc3, DMA_Handle, hdma_adc3 );
@@ -562,11 +562,11 @@ int32_t TCD_PORT_InitADC(void)
      * corresponding rank in the sequencer and its sample time.
      */
     sConfig.Channel = ADC_CHANNEL_4;
-    #ifdef ADC_REGULAR_RANK_1
+#ifdef ADC_REGULAR_RANK_1
     sConfig.Rank = ADC_REGULAR_RANK_1;
-    #else
+#else
     sConfig.Rank = 1U;
-    #endif
+#endif
 
     sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
 
@@ -586,12 +586,12 @@ int32_t TCD_PORT_InitADC(void)
  ******************************************************************************/
 int32_t TCD_PORT_StartADC(uint16_t *dataBuffer)
 {
-    if(dataBuffer == NULL)
+    if ( dataBuffer == NULL )
     {
         return -1;
     }
 
-    return (int32_t ) HAL_ADC_Start_DMA( &hadc3, (uint32_t *) dataBuffer, CFG_CCD_NUM_PIXELS );
+    return (int32_t) HAL_ADC_Start_DMA( &hadc3, (uint32_t *) dataBuffer, CFG_CCD_NUM_PIXELS );
 }
 
 /**

@@ -136,6 +136,46 @@ TCD_ERR_t TCD_Init(TCD_CONFIG_t *config)
 }
 
 /*******************************************************************************
+ * @brief   Start the timers and data acquisition with ADC+DMA
+ * @param   None
+ * @retval  TCD_OK on success or TCD_ERR_t code
+ *
+ ******************************************************************************/
+TCD_ERR_t TCD_Start(void)
+{
+    if ( TCD_pcb.readyToRun == 1U )
+    {
+        /* Start to generate ICG and SH pulses */
+        TCD_PORT_Run();
+        return TCD_OK;
+    }
+    else
+    {
+        return TCD_ERR_NOT_INITIALIZED;
+    }
+}
+
+/*******************************************************************************
+ * @brief   Stop the timers to stop the data acquisition
+ * @param   None
+ * @retval  TCD_OK on success or TCD_ERR_t code
+ *
+ ******************************************************************************/
+TCD_ERR_t TCD_Stop(void)
+{
+    if ( TCD_pcb.readyToRun == 1U )
+    {
+        /* Stop to generate ICG and SH pulses */
+        TCD_PORT_Stop();
+        return TCD_OK;
+    }
+    else
+    {
+        return TCD_ERR_NOT_INITIALIZED;
+    }
+}
+
+/*******************************************************************************
  * @Brief   Set electronic shutter period in microseconds
  * @param   config, TCD_CONFIG_t: Struct holding configuration for the TCD1304.
  * @retval  TCD_OK on success or TCD_ERR_t error codes.
@@ -178,47 +218,6 @@ TCD_ERR_t TCD_SetIntTime(TCD_CONFIG_t *config)
         return TCD_ERR_NOT_INITIALIZED;
     }
 }
-
-/*******************************************************************************
- * @brief   Start the timers and data acquisition with ADC+DMA
- * @param   None
- * @retval  TCD_OK on success or TCD_ERR_t code
- *
- ******************************************************************************/
-TCD_ERR_t TCD_Start(void)
-{
-    if ( TCD_pcb.readyToRun == 1U )
-    {
-        /* Start to generate ICG and SH pulses */
-        TCD_PORT_Run();
-        return TCD_OK;
-    }
-    else
-    {
-        return TCD_ERR_NOT_INITIALIZED;
-    }
-}
-
-/*******************************************************************************
- * @brief   Stop the timers to stop the data acquisition
- * @param   None
- * @retval  TCD_OK on success or TCD_ERR_t code
- *
- ******************************************************************************/
-TCD_ERR_t TCD_Stop(void)
-{
-    if ( TCD_pcb.readyToRun == 1U )
-    {
-        /* Stop to generate ICG and SH pulses */
-        TCD_PORT_Stop();
-        return TCD_OK;
-    }
-    else
-    {
-        return TCD_ERR_NOT_INITIALIZED;
-    }
-}
-
 
 /*******************************************************************************
  * @brief   Handle sensor data when the ADC+DMA has samples all pixels.
@@ -369,7 +368,7 @@ static TCD_ERR_t TCD_SH_Init(void)
     TCD_ERR_t err = TCD_OK;
 
     /* Check that P_ICG = N x P_SH, where N is an integer */
-    if ( TCD_config->t_icg_us % TCD_config->t_int_us)
+    if ( TCD_config->t_icg_us % TCD_config->t_int_us )
     {
         return TCD_ERR_SH_INIT;
     }
