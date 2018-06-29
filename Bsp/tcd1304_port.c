@@ -56,7 +56,7 @@ typedef struct
     uint32_t f_master;
     uint32_t t_int_us;
     uint32_t t_icg_us;
-    uint32_t Fs;
+    uint32_t f_adc;
 } PORT_TIMER_CONF_t;
 
 /* Private define ------------------------------------------------------------*/
@@ -392,15 +392,15 @@ int32_t TCD_PORT_ConfigSHClock(const uint32_t t_int_us)
  * any potential issues with data alignment.
  *
  ******************************************************************************/
-void TCD_PORT_ConfigADCTrigger(uint32_t Fs)
+void TCD_PORT_ConfigADCTrigger(uint32_t f_adc)
 {
     TIM_ClockConfigTypeDef sClockSourceConfig;
     TIM_MasterConfigTypeDef sMasterConfig;
     TIM_OC_InitTypeDef sConfigOC;
     GPIO_InitTypeDef GPIO_InitStruct;
     TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig;
-    uint32_t period = HAL_RCC_GetSysClockFreq() / Fs - 1U;
-    timer_conf.Fs = Fs;
+    uint32_t period = HAL_RCC_GetSysClockFreq() / f_adc - 1U;
+    timer_conf.f_adc = f_adc;
 
     /* Peripheral clock enable */
     __HAL_RCC_TIM8_CLK_ENABLE();
