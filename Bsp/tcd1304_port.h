@@ -111,7 +111,7 @@ int32_t TCD_PORT_ConfigSHClock(const uint32_t t_int_us);
 int32_t TCD_PORT_ConfigICGClock(const uint32_t t_icg_us);
 
 int32_t TCD_PORT_InitADC(void);
-void    TCD_PORT_ConfigADCTrigger(uint32_t Fs);
+void    TCD_PORT_ConfigADCTrigger(uint32_t f_adc);
 int32_t TCD_PORT_StartADC(uint16_t *dataBuffer);
 
 /**
