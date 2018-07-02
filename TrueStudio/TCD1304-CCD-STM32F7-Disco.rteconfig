@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration xmlns:xs="http://www.w3.org/2001/XMLSchema-instance">
+<packages/>
+<device Dclock="216000000" Dcore="Cortex-M7" DcoreVersion="r0p1" Dendian="Little-endian" Dfamily="STM32F7 Series" Dfpu="SP_FPU" Dmpu="MPU" Dname="STM32F746NG" DsubFamily="STM32F746" Dvariant="STM32F746NGHx" Dvendor="STMicroelectronics:13" Pname="">
+<url>http://www.keil.com/dd2/st/stm32f746nghx</url>
+<package name="STM32F7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+</device>
+<toolchain Tcompiler="GCC" Toutput="exe"/>
+<components>
+<component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.1.1">
+<package name="CMSIS" url="http://www.keil.com/pack/" vendor="ARM" version="5.3.0"/>
+<file category="doc" name="CMSIS/Documentation/Core/html/index.html"/>
+<file category="include" name="CMSIS/Include/"/>
+</component>
+<component Capiversion="1.0.0" Cclass="Device" Cgroup="STM32Cube Framework" Csub="Classic" Cvendor="Keil" Cversion="1.2.0" deviceDependent="1">
+<package name="STM32F7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+<file category="doc" deviceDependent="1" name="MDK/CubeMX/Documentation/classic.html"/>
+<file attr="config" category="header" deviceDependent="1" name="CMSIS/Driver/Config/RTE_Device.h" version="1.4.0"/>
+<file attr="config" category="header" deviceDependent="1" name="MDK/Templates/Inc/stm32f7xx_hal_conf.h" version="1.2.0"/>
+<file attr="template" category="source" deviceDependent="1" name="MDK/Templates/Src/stm32f7xx_hal_msp.c" select="MCU Specific HAL Initialization / De-Initialization"/>
+<file attr="template" category="header" deviceDependent="1" name="MDK/Templates/Inc/stm32f7xx_it.h" select="Exception Handlers and Peripheral IRQ"/>
+<file attr="template" category="source" deviceDependent="1" name="MDK/Templates/Src/stm32f7xx_it.c" select="Exception Handlers and Peripheral IRQ"/>
+<file attr="template" category="header" deviceDependent="1" name="MDK/Templates/Inc/main.h" select="'main' module for STM32Cube"/>
+<file attr="template" category="source" deviceDependent="1" name="MDK/Templates/Src/main.c" select="'main' module for STM32Cube"/>
+</component>
+<component Cclass="Device" Cgroup="STM32Cube HAL" Csub="ADC" Cvendor="Keil" Cversion="1.2.0" deviceDependent="1">
+<package name="STM32F7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_adc.c"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_adc_ex.c"/>
+</component>
+<component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Common" Cvendor="Keil" Cversion="1.2.0" deviceDependent="1">
+<package name="STM32F7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+<file category="include" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Inc/"/>
+<file category="header" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c"/>
+</component>
+<component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Cortex" Cvendor="Keil" Cversion="1.2.0" deviceDependent="1">
+<package name="STM32F7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c"/>
+</component>
+<component Cclass="Device" Cgroup="STM32Cube HAL" Csub="DMA" Cvendor="Keil" Cversion="1.2.0" deviceDependent="1">
+<package name="STM32F7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma.c"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma_ex.c"/>
+</component>
+<component Cclass="Device" Cgroup="STM32Cube HAL" Csub="GPIO" Cvendor="Keil" Cversion="1.2.0" deviceDependent="1">
+<package name="STM32F7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c"/>
+</component>
+<component Cclass="Device" Cgroup="STM32Cube HAL" Csub="PWR" Cvendor="Keil" Cversion="1.2.0" deviceDependent="1">
+<package name="STM32F7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.c"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.c"/>
+</component>
+<component Cclass="Device" Cgroup="STM32Cube HAL" Csub="RCC" Cvendor="Keil" Cversion="1.2.0" deviceDependent="1">
+<package name="STM32F7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.c"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.c"/>
+</component>
+<component Cclass="Device" Cgroup="STM32Cube HAL" Csub="TIM" Cvendor="Keil" Cversion="1.2.0" deviceDependent="1">
+<package name="STM32F7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim.c"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.c"/>
+</component>
+<component Cclass="Device" Cgroup="STM32Cube HAL" Csub="UART" Cvendor="Keil" Cversion="1.2.0" deviceDependent="1">
+<package name="STM32F7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+<file category="source" deviceDependent="1" name="Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.c"/>
+</component>
+</components>
+<apis>
+<api Capiversion="1.1.0" Cclass="Device" Cgroup="STM32Cube Framework" Cvendor="Keil" Cversion="1.1.0" exclusive="1">
+<package name="STM32H7xx_DFP" url="http://www.keil.com/pack" vendor="Keil" version="2.1.0"/>
+<file category="doc" name="MDK/CubeMX/Documentation/index.html"/>
+</api>
+</apis>
+</configuration>
