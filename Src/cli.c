@@ -227,7 +227,7 @@ static CLI_ERR_t CLI_ProcessCommand(char byte)
             sensor_config.t_int_us = t_sh_us;
             TCD_SetIntTime( &sensor_config );
 
-            sprintf( ack, "SH = %d\r\n", t_sh_us );
+            sprintf( ack, "SH = %u\r\n", (unsigned int) t_sh_us );
             HAL_UART_Transmit( CLI_uart, (uint8_t *) ack, strlen( ack ), 1000U );
         }
 
@@ -237,7 +237,7 @@ static CLI_ERR_t CLI_ProcessCommand(char byte)
             extern TCD_CONFIG_t sensor_config;
             sensor_config.t_icg_us = t_icg_us;
 
-            sprintf( ack, "ICG = %d\r\n", t_icg_us );
+            sprintf( ack, "ICG = %u\r\n", (unsigned int) t_icg_us );
             HAL_UART_Transmit( CLI_uart, (uint8_t *) ack, strlen( ack ), 1000U );
         }
 
@@ -247,7 +247,7 @@ static CLI_ERR_t CLI_ProcessCommand(char byte)
             extern TCD_CONFIG_t sensor_config;
             sensor_config.avg = avg;
 
-            sprintf( ack, "AVG = %d\r\n", avg );
+            sprintf( ack, "AVG = %u\r\n", (unsigned int) avg );
             HAL_UART_Transmit( CLI_uart, (uint8_t *) ack, strlen( ack ), 1000U );
         }
 
