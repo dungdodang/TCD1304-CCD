@@ -319,11 +319,11 @@ static TCD_ERR_t TCD_FM_Init(void)
 
     if ( (TCD_config->f_master <= 4000000U) && (TCD_config->f_master >= 800000U) )
     {
-        TCD_PORT_ConfigMasterClock( TCD_config->f_master );
+        TCD_PORT_FM_ConfigClock( TCD_config->f_master );
     }
     else
     {
-        TCD_PORT_ConfigMasterClock( CFG_FM_FREQUENCY_HZ );
+        TCD_PORT_FM_ConfigClock( CFG_FM_FREQUENCY_HZ );
         err = TCD_WARN_FM;
     }
 
@@ -342,11 +342,11 @@ static TCD_ERR_t TCD_ICG_Init(void)
 
     if ( (TCD_config->t_icg_us > 0U) && (TCD_config->t_icg_us <= CFG_ICG_MAX_PERIOD_US) )
     {
-        TCD_PORT_ConfigICGClock( TCD_config->t_icg_us );
+        TCD_PORT_ICG_ConfigClock( TCD_config->t_icg_us );
     }
     else
     {
-        TCD_PORT_ConfigICGClock( CFG_ICG_DEFAULT_PERIOD_US );
+        TCD_PORT_ICG_ConfigClock( CFG_ICG_DEFAULT_PERIOD_US );
         err = TCD_WARN_ICG;
     }
 
@@ -375,11 +375,11 @@ static TCD_ERR_t TCD_SH_Init(void)
 
     if ( (TCD_config->t_int_us >= 10U) && (TCD_config->t_int_us <= TCD_config->t_icg_us) )
     {
-        TCD_PORT_ConfigSHClock( TCD_config->t_int_us );
+        TCD_PORT_SH_ConfigClock( TCD_config->t_int_us );
     }
     else
     {
-        TCD_PORT_ConfigSHClock( CFG_SH_DEFAULT_PERIOD_US );
+        TCD_PORT_SH_ConfigClock( CFG_SH_DEFAULT_PERIOD_US );
         err = TCD_WARN_SH;
     }
 
@@ -394,7 +394,7 @@ static TCD_ERR_t TCD_SH_Init(void)
 static TCD_ERR_t TCD_ADC_Init(void)
 {
     /* Initialize the ADC hardware and DMA */
-    if ( TCD_PORT_InitADC() != 0 )
+    if ( TCD_PORT_ADC_Init() != 0 )
     {
         return TCD_ERR_ADC_INIT;
     }
@@ -405,10 +405,10 @@ static TCD_ERR_t TCD_ADC_Init(void)
         return TCD_ERR_ADC_INIT;
     }
     /* Initialize the timer used to trigger AD conversion with f_ADC = f_MCLK / 4 */
-    TCD_PORT_ConfigADCTrigger( TCD_config->f_master / 4U );
+    TCD_PORT_ADC_ConfigTrigger( TCD_config->f_master / 4U );
 
     /* Start the DMA transfer */
-    if ( TCD_PORT_StartADC( TCD_pcb.data.SensorData ) == 0 )
+    if ( TCD_PORT_ADC_Start( TCD_pcb.data.SensorData ) == 0 )
     {
         return TCD_OK;
     }

@@ -106,13 +106,13 @@ extern "C"
 void    TCD_PORT_Run(void);
 void    TCD_PORT_Stop(void);
 
-int32_t TCD_PORT_ConfigMasterClock(const uint32_t freq);
-int32_t TCD_PORT_ConfigSHClock(const uint32_t t_int_us);
-int32_t TCD_PORT_ConfigICGClock(const uint32_t t_icg_us);
+int32_t TCD_PORT_FM_ConfigClock(const uint32_t freq);
+int32_t TCD_PORT_SH_ConfigClock(const uint32_t t_int_us);
+int32_t TCD_PORT_ICG_ConfigClock(const uint32_t t_icg_us);
 
-int32_t TCD_PORT_InitADC(void);
-void    TCD_PORT_ConfigADCTrigger(uint32_t f_adc);
-int32_t TCD_PORT_StartADC(uint16_t *dataBuffer);
+int32_t TCD_PORT_ADC_Init(void);
+void    TCD_PORT_ADC_ConfigTrigger(uint32_t f_adc);
+int32_t TCD_PORT_ADC_Start(uint16_t *dataBuffer);
 
 /**
  * This function is called when a complete CCD sensor readout is finished.

@@ -123,7 +123,7 @@ void TCD_PORT_Stop(void)
  * @retval  Error code
  *
  ******************************************************************************/
-int32_t TCD_PORT_ConfigMasterClock(uint32_t freq)
+int32_t TCD_PORT_FM_ConfigClock(uint32_t freq)
 {
     TIM_OC_InitTypeDef sConfigOC;
     GPIO_InitTypeDef GPIO_InitStruct;
@@ -193,7 +193,7 @@ int32_t TCD_PORT_ConfigMasterClock(uint32_t freq)
  * @retval  Error code
  *
  ******************************************************************************/
-int32_t TCD_PORT_ConfigICGClock(const uint32_t t_icg_us)
+int32_t TCD_PORT_ICG_ConfigClock(const uint32_t t_icg_us)
 {
     TIM_ClockConfigTypeDef sClockSourceConfig;
     TIM_MasterConfigTypeDef sMasterConfig;
@@ -289,7 +289,7 @@ int32_t TCD_PORT_ConfigICGClock(const uint32_t t_icg_us)
  * @retval  Error code
  *
  ******************************************************************************/
-int32_t TCD_PORT_ConfigSHClock(const uint32_t t_int_us)
+int32_t TCD_PORT_SH_ConfigClock(const uint32_t t_int_us)
 {
     TIM_OC_InitTypeDef sConfigOC;
     GPIO_InitTypeDef GPIO_InitStruct;
@@ -391,7 +391,7 @@ int32_t TCD_PORT_ConfigSHClock(const uint32_t t_int_us)
  * any potential issues with data alignment.
  *
  ******************************************************************************/
-void TCD_PORT_ConfigADCTrigger(uint32_t f_adc)
+void TCD_PORT_ADC_ConfigTrigger(uint32_t f_adc)
 {
     TIM_ClockConfigTypeDef sClockSourceConfig;
     TIM_MasterConfigTypeDef sMasterConfig;
@@ -494,7 +494,7 @@ void TCD_PORT_ConfigADCTrigger(uint32_t f_adc)
  * @retval  None
  *
  ******************************************************************************/
-int32_t TCD_PORT_InitADC(void)
+int32_t TCD_PORT_ADC_Init(void)
 {
     ADC_ChannelConfTypeDef sConfig;
     GPIO_InitTypeDef GPIO_InitStruct;
@@ -583,7 +583,7 @@ int32_t TCD_PORT_InitADC(void)
  * @retval  Error codes
  *
  ******************************************************************************/
-int32_t TCD_PORT_StartADC(uint16_t *dataBuffer)
+int32_t TCD_PORT_ADC_Start(uint16_t *dataBuffer)
 {
     if ( dataBuffer == NULL )
     {
