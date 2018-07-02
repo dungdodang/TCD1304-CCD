@@ -4,3 +4,5 @@ MDK-ARM/
 !MDK-ARM/TCD-Spectrometer-DISCO.uvprojx
 !MDK-ARM/TCD-Spectrometer-DISCO.uvoptx
 !MDK-ARM/startup_stm32f746xx.s
+
+TrueStudio/Debug/
