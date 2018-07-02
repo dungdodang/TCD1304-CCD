@@ -194,15 +194,23 @@
         <newCpu>0</newCpu>
         <uProt>0</uProt>
       </DebugFlag>
-      <LintExecutable></LintExecutable>
+      <LintExecutable>C:\Lint\lint-nt.exe</LintExecutable>
       <LintConfigFile></LintConfigFile>
       <bLintAuto>0</bLintAuto>
       <bAutoGenD>0</bAutoGenD>
-      <LntExFlags>0</LntExFlags>
-      <pMisraName></pMisraName>
-      <pszMrule></pszMrule>
-      <pSingCmds></pSingCmds>
-      <pMultCmds></pMultCmds>
+      <LntExFlags>59</LntExFlags>
+      <pMisraName>.\Lint\MISRA_C_2012_Config.lnt</pMisraName>
+      <pszMrule>MISRA_C_2012_Config</pszMrule>
+      <pSingCmds>..\PC-Lint\project_conf.lnt
+</pSingCmds>
+      <pMultCmds>-wlib(4)
+-wlib(1)
++libdir(../Drivers/STM32F7xx_HAL_Driver/Inc)
++libdir(../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy)
++libdir(../Drivers/CMSIS/Device/ST/STM32F7xx/Include)
+
+..\PC-Lint\project_conf.lnt
+</pMultCmds>
       <pMisraNamep></pMisraNamep>
       <pszMrulep></pszMrulep>
       <pSingCmdsp></pSingCmdsp>
@@ -215,6 +223,7 @@
       </SystemViewers>
       <DebugDescription>
         <Enable>1</Enable>
+        <EnableFlashSeq>0</EnableFlashSeq>
         <EnableLog>0</EnableLog>
         <Protocol>2</Protocol>
         <DbgClock>10000000</DbgClock>

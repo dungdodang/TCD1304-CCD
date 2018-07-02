@@ -1,0 +1,33 @@
+/**
+ *******************************************************************************
+ * @file    lgv_lint_opt.h
+ * @author  Dung Do Dang
+ * @version V1.0.0
+ * @date    2018-07-02
+ * @brief   This file configure PC-Lint to tailor the needs for static software
+ * analysis with Gimpel Software PC-Lint/Flexlint.
+ *
+ *******************************************************************************
+ *
+ * COPYRIGHT(c) 2018 Dung Do Dang
+ *
+ *******************************************************************************
+ */
+
+-summary() // Generate a summary of messages at the bottom of the output
+
+-passes=2 //reveals more errors when passing two times or more
+
+/* Use ONLY one and comment out the other options */
+//-w0 //No messages (except for fatal errors)
+//-w1 //Error messages only -- no Warnings or Informationals.
+-w2 //Error and Warning messages only
+//-w3 //Error, Warning and Informational messages (this is the default)
+//-w4 //All messages. 
+
+-d__RESTRICT= //keyword used (new) in arm compiler 6 (mpu_armv7.h)
+
+-e970  // int main(void) is allowed by MISRA-C
+-e9075 // int main(void) is allowed without prior declaration
+-e534  // Warning 534: Ignoring return value of function
+-e537  // Warning: Repeated include file
