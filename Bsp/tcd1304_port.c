@@ -68,7 +68,6 @@ static TIM_HandleTypeDef htim13;
 static TIM_HandleTypeDef htim14;
 static ADC_HandleTypeDef hadc3;
 static DMA_HandleTypeDef hdma_adc3;
-
 static PORT_TIMER_CONF_t timer_conf;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -94,7 +93,7 @@ void TCD_PORT_Run(void)
     TCD_PORT_SH_SetDelay( CFG_SH_DEFAULT_PULSE_DELAY_CNT );
 
     /* Disable the DMA transfer half complete interrupt */
-    __HAL_DMA_DISABLE_IT( &hdma_adc3, DMA_IT_HT );
+    __HAL_DMA_DISABLE_IT( &hdma_adc3, DMA_IT_HT ); /*lint !e506 */
 
     /* Reset the timer counters to 0 */
     htim2.Instance->CNT = 0U;
@@ -179,7 +178,7 @@ int32_t TCD_PORT_ConfigMasterClock(uint32_t freq)
     /* Enable the Capture compare channel */
     TIM_CCxChannelCmd( htim13.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE );
 
-    if ( IS_TIM_ADVANCED_INSTANCE( htim13.Instance ) != RESET )
+    if ( IS_TIM_ADVANCED_INSTANCE( htim13.Instance ) )
     {
         /* Enable the main output */
         __HAL_TIM_MOE_ENABLE( &htim13 );
@@ -272,7 +271,7 @@ int32_t TCD_PORT_ConfigICGClock(const uint32_t t_icg_us)
     /* Enable the Capture compare channel */
     TIM_CCxChannelCmd( htim2.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE );
 
-    if ( IS_TIM_ADVANCED_INSTANCE( htim2.Instance ) != RESET )
+    if ( IS_TIM_ADVANCED_INSTANCE( htim2.Instance ) )
     {
         /* Enable the main output */
         __HAL_TIM_MOE_ENABLE( &htim2 );
@@ -347,7 +346,7 @@ int32_t TCD_PORT_ConfigSHClock(const uint32_t t_int_us)
     /* Enable the Capture compare channel */
     TIM_CCxChannelCmd( htim14.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE );
 
-    if ( IS_TIM_ADVANCED_INSTANCE( htim14.Instance ) != RESET )
+    if ( IS_TIM_ADVANCED_INSTANCE( htim14.Instance ) )
     {
         /* Enable the main output */
         __HAL_TIM_MOE_ENABLE( &htim14 );
@@ -705,6 +704,9 @@ void TCD_CCD_ADC_INTERRUPT_HANDLER(void)
  */
 __weak void _Error_Handler(char *file, int line)
 {
+    UNUSED( timer_conf );
+    UNUSED( TCD_PORT_DisableADCTrigger );
+
     /* User should implement this function some else */
 }
 /****************************** END OF FILE ***********************************/
