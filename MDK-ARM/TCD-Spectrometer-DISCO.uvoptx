@@ -564,7 +564,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Bsp\tcd1304.c</PathWithFileName>
+      <PathWithFileName>..\Bsp\tcd1304\tcd1304.c</PathWithFileName>
       <FilenameWithoutPath>tcd1304.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -576,7 +576,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Bsp\tcd1304_port.c</PathWithFileName>
+      <PathWithFileName>..\Bsp\tcd1304\port\stm32f746\tcd1304_port.c</PathWithFileName>
       <FilenameWithoutPath>tcd1304_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
