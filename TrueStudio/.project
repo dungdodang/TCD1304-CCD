@@ -46,29 +46,9 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>Bsp/tcd1304.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Bsp/tcd1304.c</locationURI>
-		</link>
-		<link>
-			<name>Bsp/tcd1304.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Bsp/tcd1304.h</locationURI>
-		</link>
-		<link>
-			<name>Bsp/tcd1304_conf.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Bsp/tcd1304_conf.h</locationURI>
-		</link>
-		<link>
-			<name>Bsp/tcd1304_port.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Bsp/tcd1304_port.c</locationURI>
-		</link>
-		<link>
-			<name>Bsp/tcd1304_port.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Bsp/tcd1304_port.h</locationURI>
+			<name>Bsp/tcd1304</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS</name>
@@ -121,7 +101,32 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Src/system_stm32f7xx.c</locationURI>
 		</link>
 		<link>
+			<name>Bsp/tcd1304/port</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>Bsp/tcd1304/tcd1304.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Bsp/tcd1304/tcd1304.c</locationURI>
+		</link>
+		<link>
+			<name>Bsp/tcd1304/tcd1304.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Bsp/tcd1304/tcd1304.h</locationURI>
+		</link>
+		<link>
+			<name>Bsp/tcd1304/tcd1304_conf.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Bsp/tcd1304/tcd1304_conf.h</locationURI>
+		</link>
+		<link>
 			<name>Drivers/CMSIS/Device</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>Bsp/tcd1304/port/stm32f746</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
@@ -199,6 +204,16 @@
 			<name>RTE/Device/STM32F746NGHx/stm32f7xx_hal_uart.c</name>
 			<type>1</type>
 			<locationURI>$%7Bcmsis_pack_root%7D/Keil/STM32F7xx_DFP/2.9.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.c</locationURI>
+		</link>
+		<link>
+			<name>Bsp/tcd1304/port/stm32f746/tcd1304_port.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Bsp/tcd1304/port/stm32f746/tcd1304_port.c</locationURI>
+		</link>
+		<link>
+			<name>Bsp/tcd1304/port/stm32f746/tcd1304_port.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Bsp/tcd1304/port/stm32f746/tcd1304_port.h</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/Device/ST/STM32F7xx</name>
